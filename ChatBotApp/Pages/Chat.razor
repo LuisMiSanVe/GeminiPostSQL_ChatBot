@@ -1,0 +1,37 @@
+﻿@page "/"
+@inject ChatService ChatService
+
+<h3>AI Chatbot</h3>
+
+<div>
+    <input @bind="userMessage" @bind:event="oninput" placeholder="Type your message..." />
+    <button @onclick="SendMessage" disabled="@isWaiting">Send</button>
+</div>
+
+<ul>
+    @foreach (var message in chatHistory)
+    {
+        <li>@message</li>
+    }
+</ul>
+
+@code {
+    private string userMessage = "";
+    private List<string> chatHistory = new();
+    private bool isWaiting = false; // Controls button state
+
+    private async Task SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(userMessage))
+        {
+            chatHistory.Add("You: " + userMessage);
+            isWaiting = true;  // Disable button while waiting
+
+            var response = await ChatService.GetResponseAsync(userMessage);
+            chatHistory.Add("AI: " + response);
+
+            userMessage = "";
+            isWaiting = false; // Re-enable button
+        }
+    }
+}
