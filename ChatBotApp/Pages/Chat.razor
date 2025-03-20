@@ -24,11 +24,11 @@
     {
         if (!string.IsNullOrWhiteSpace(userMessage))
         {
-            chatHistory.Add("You: " + userMessage);
+            chatHistory.Add("User: " + userMessage);
             isWaiting = true;  // Disable button while waiting
 
             var response = await ChatService.GetResponseAsync(userMessage);
-            chatHistory.Add("AI: " + response);
+            chatHistory.Add("GeminiPostSQL ChatBot: " + response);
 
             userMessage = "";
             isWaiting = false; // Re-enable button
