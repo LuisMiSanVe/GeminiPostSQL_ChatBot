@@ -2,7 +2,7 @@
 
 <img src="https://github.com/LuisMiSanVe/LuisMiSanVe/blob/main/Resources/GeminiPostSQL/GeminiPostSQLChatBot_banner.png" style="width: 100%; height: auto;" alt="GeminiPostSQL Banner">
 
-# <img src="https://github.com/LuisMiSanVe/GeminiPostSQL/blob/main/AiPostgreWinForms/Resources/icon.ico" width="40" alt="Logo de GeminiPostSQL"> GeminiPostSQL ChatBot | ChatBot de Blazor Asistido por IA para PostgreSQL
+# <img src="https://github.com/LuisMiSanVe/GeminiPostSQL_ChatBot/blob/main/ChatBotApp/wwwroot/favicon.png" width="40" alt="Logo de GeminiPostSQL"> GeminiPostSQL ChatBot | ChatBot de Blazor Asistido por IA para PostgreSQL
 [![image](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)](https://dotnet.microsoft.com/en-us/languages/csharp)
 [![image](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)](https://dotnet.microsoft.com/en-us/learn/dotnet/what-is-dotnet)
 [![image](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
@@ -15,7 +15,7 @@
 > Esta es la versión de ChatBot en Blazor pensada para ser usada como cliente web. Hay una versión de [REST API](https://github.com/LuisMiSanVe/GeminiPostSQL_API/blob/main/README.es.md) pensada para su uso en servidores o clientes con la interfaz de Swagger y otra en [WinForms](https://github.com/LuisMiSanVe/GeminiPostSQL/tree/main) para su uso en Escritorio de Windows.
 
 Este ChatBot usa la IA de Google 'Gemini 2.0 Flash' para generar consultas a bases de datos PostgreSQL.  
-La IA convierte lenguaje natural a consultas SQL usando un método con sus ventajas y desventajas.
+La IA convierte lenguaje natural a consultas SQL, estas se ejecutan y los resultados son transformados a lenguaje natural de nuevo.
 
 ## 📋 Prerequisitos
 
