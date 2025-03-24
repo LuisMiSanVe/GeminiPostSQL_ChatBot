@@ -40,7 +40,7 @@ The natural-sql-natural process methods works like this:
 
 This method maps the database structure into a JSON that Gemini analyzes to create an SQL query to fulfill the user's request, which is then run by the PostgreSQL Server, returning the requested data.
 
-Then, this data is processed by Gemini again to resume the results into natural language.
+Then, this data is processed by Gemini again to summary the results into natural language.
 
 Because the AI needs to process **two requests** (text to query and result table to text) the token usage is pretty high, thats why the **remembering capability** of the ChatBot is limited to the 5 prior messages, as is not meant to keep a single chat for too long.
 
