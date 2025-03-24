@@ -33,7 +33,7 @@ Google allows free use of this API without adding billing information, but there
 In Google AI Studio, you can monitor the AI's usage by clicking 'View usage data' in the 'Plan' column where your projects are displayed. I recommend monitoring the 'Quota and system limits' tab and sorting by 'actual usage percentage,' as it provides the most detailed information.
 
 You now have everything needed to make the program work.  
-Simply put that data you just got into the setting windows in the program.
+Simply put that data you just got into the code's parameters strings.
 
 ## 📖 About the Blazor ChatBot
 The natural-sql-natural process methods works like this:
