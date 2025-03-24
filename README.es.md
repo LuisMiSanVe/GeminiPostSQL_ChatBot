@@ -44,7 +44,7 @@ Este método mapea la estructura de la base de datos en un JSON que Gemini anali
 
 Entonces, esos datos son procesados por Gemini de nuevo para resumir los resultados en lenguaje natural.
 
-Ya que la IA necesita procesar **dos solicitudes** (texto a sentencia SQÑ y tabla de resultados a texto) el uso de tokens es bastante alto, es por eso que la **capacidad de recordar** del ChatBot está limitada a los últimos 5 mensajes, ya que no está pensado que un chat se mantenga por demasiado tiempo.
+Ya que la IA necesita procesar **dos solicitudes** (texto a sentencia SQL y tabla de resultados a texto) el uso de tokens es bastante alto, es por eso que la **capacidad de recordar** del ChatBot está limitada a los últimos 5 mensajes, ya que no está pensado que un chat se mantenga por demasiado tiempo.
 
 Los chats no se guardan, por lo que el ChatBot consiste en un chat de una sola sesión volatil. Presiona `F5` para borrar los mensajes del chat actual.
 
