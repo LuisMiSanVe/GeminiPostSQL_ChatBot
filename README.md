@@ -12,7 +12,7 @@
 [![image](https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white)](https://visualstudio.microsoft.com/)
 
 >[!NOTE]
-> This is the Blazor ChatBot version meant for web client use. There is a [REST API](https://github.com/LuisMiSanVe/GeminiPostSQL_API/tree/main) version meant for servers and client use by Swagger interface and a [WinForms](https://github.com/LuisMiSanVe/GeminiPostSQL/tree/main) version for Windows Desktop client use.
+> This is the Blazor ChatBot version meant for web client use. There is a [REST API](https://github.com/LuisMiSanVe/GeminiPostSQL_API/tree/main) version meant for servers with Swagger and a [WinForms](https://github.com/LuisMiSanVe/GeminiPostSQL/tree/main) version for Windows Desktop client use.
 
 This ChatBot program uses Google's AI 'Gemini 2.0 Flash' to make queries to PostgreSQL databases.  
 The AI interprets natural language into SQL queries, run them, and transform the results into natural language again.
@@ -34,6 +34,17 @@ In Google AI Studio, you can monitor the AI's usage by clicking 'View usage data
 
 You now have everything needed to make the program work.  
 Simply put that data you just got into the setting windows in the program.
+
+## 📖 About the Blazor ChatBot
+The natural-sql-natural process methods works like this:
+
+This method maps the database structure into a JSON that Gemini analyzes to create an SQL query to fulfill the user's request, which is then run by the PostgreSQL Server, returning the requested data.
+
+Then, this data is processed by Gemini again to resume the results into natural language.
+
+Because the AI needs to process **two requests** (text to query and result table to text) the token usage is pretty high, thats why the **remembering capability** of the ChatBot is limited to the 5 prior messages, as is not meant to keep a single chat for too long.
+
+The chats are not stored so the ChatBot consists in a volatile single-session chat. Press `F5` to clear the current chat.
 
 ## 💻 Technologies Used
 - Programming Language: [C#](https://dotnet.microsoft.com/en-us/languages/csharp)
