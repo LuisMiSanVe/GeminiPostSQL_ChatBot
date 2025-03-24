@@ -24,8 +24,6 @@
 
         public async Task<string> GetResponseAsync(string userInput)
         {
-            // ---
-
             // Connects to the database
             var connection = new NpgsqlConnection(database);
 
