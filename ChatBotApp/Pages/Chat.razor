@@ -1,20 +1,22 @@
 ﻿@page "/"
 @inject ChatService ChatService
 
-<h3>GeminiPostSQL ChatBot</h3>
+<div class="container">
+    <h3><img src="favicon.png"/>GeminiPostSQL ChatBot</h3>
 
-<div class="chat-container">
-    <ul class="chat-history">
-        @foreach (var message in chatHistory)
-        {
-            <li class="chat-message">@((MarkupString)message)</li>
-        }
-    </ul>
-</div>
+    <div class="chat-container">
+        <ul class="chat-history">
+            @foreach (var message in chatHistory)
+            {
+                <li class="chat-message">@((MarkupString)message)</li>
+            }
+        </ul>
+    </div>
 
-<div class="chat-input">
-    <input @bind="userMessage" @bind:event="oninput" placeholder="Type your request..." />
-    <button @onclick="SendMessage" disabled="@isWaiting">Send</button>
+    <div class="chat-input">
+        <input @bind="userMessage" @bind:event="oninput" placeholder="Type your request..." />
+        <button @onclick="SendMessage" disabled="@isWaiting">Send</button>
+    </div>
 </div>
 
 @code {
