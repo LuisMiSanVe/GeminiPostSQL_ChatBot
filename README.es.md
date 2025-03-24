@@ -12,7 +12,7 @@
 [![image](https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white)](https://visualstudio.microsoft.com/)
 
 >[!NOTE]
-> Esta es la versión de ChatBot en Blazor pensada para ser usada como cliente web. Hay una versión de [REST API](https://github.com/LuisMiSanVe/GeminiPostSQL_API/blob/main/README.es.md) pensada para su uso en servidores o clientes con la interfaz de Swagger y otra en [WinForms](https://github.com/LuisMiSanVe/GeminiPostSQL/tree/main) para su uso en Escritorio de Windows.
+> Esta es la versión de ChatBot en Blazor pensada para ser usada como cliente web. Hay una versión de [REST API](https://github.com/LuisMiSanVe/GeminiPostSQL_API/blob/main/README.es.md) pensada para su uso en servidores con Swagger y otra en [WinForms](https://github.com/LuisMiSanVe/GeminiPostSQL/tree/main) para su uso en Escritorio de Windows.
 
 Este ChatBot usa la IA de Google 'Gemini 2.0 Flash' para generar consultas a bases de datos PostgreSQL.  
 La IA convierte lenguaje natural a consultas SQL, estas se ejecutan y los resultados son transformados a lenguaje natural de nuevo.
@@ -36,6 +36,17 @@ En Google AI Studio, puedes monitorizar el uso de la IA haciendo clic en 'Ver da
 
 Ya tienes todo lo que necesitas para hacer funcionar el programa.  
 Simplemente pon los datos que acabas de conseguir en las pantallas de configuración del programa.
+
+## 📖 Sobre el ChatBot en Blazor
+El método que hace el proceso natural-sql-natural funciona así:
+
+Este método mapea la estructura de la base de datos en un JSON que Gemini analiza para crear una consulta SQL, la cual es ejecutada por el servidor PostgreSQL directamente.
+
+Entonces, esos datos son procesados por Gemini de nuevo para resumir los resultados en lenguaje natural.
+
+Ya que la IA necesita procesar **dos solicitudes** (texto a sentencia SQÑ y tabla de resultados a texto) el uso de tokens es bastante alto, es por eso que la **capacidad de recordar** del ChatBot está limitada a los últimos 5 mensajes, ya que no está pensado que un chat se mantenga por demasiado tiempo.
+
+Los chats no se guardan, por lo que el ChatBot consiste en un chat de una sola sesión volatil. Presiona `F5` para borrar los mensajes del chat actual.
 
 ## 💻 Tecnologías usadas
 - Lenguaje de programación: [C#](https://dotnet.microsoft.com/en-us/languages/csharp)
