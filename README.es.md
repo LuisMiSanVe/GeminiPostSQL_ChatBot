@@ -40,11 +40,11 @@ Simplemente pon los datos que acabas de conseguir en los strings de parámetros 
 ## 📖 Sobre el ChatBot en Blazor
 El método que hace el proceso natural-sql-natural funciona así:
 
-Este método mapea la estructura de la base de datos en un JSON que Gemini analiza para crear una consulta SQL, la cual es ejecutada por el servidor PostgreSQL directamente.
+Este [método](https://gist.github.com/LuisMiSanVe/2da8e2d932a06ef408b3ee8468d0d820) mapea la estructura de la base de datos en un JSON que Gemini analiza para crear una consulta SQL, la cual es ejecutada por el servidor PostgreSQL directamente.
 
 Entonces, esos datos son procesados por Gemini de nuevo para resumir los resultados en lenguaje natural.
 
-Ya que la IA necesita procesar **dos solicitudes** (texto a sentencia SQL y tabla de resultados a texto) el uso de tokens es bastante alto, es por eso que la **capacidad de recordar** del ChatBot está limitada a los últimos 5 mensajes, ya que no está pensado que un chat se mantenga por demasiado tiempo.
+Ya que la IA necesita procesar **dos solicitudes** ([texto a sentencia SQL y tabla de resultados a texto](https://gist.github.com/LuisMiSanVe/b189c8920d2dcedf5fd46485f3403d51)) el uso de tokens es bastante alto, es por eso que la **capacidad de recordar** del ChatBot está limitada a los últimos 5 mensajes, ya que no está pensado que un chat se mantenga por demasiado tiempo.
 
 Los chats no se guardan, por lo que el ChatBot consiste en un chat de una sola sesión volatil. Presiona `F5` para borrar los mensajes del chat actual.
 
