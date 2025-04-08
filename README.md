@@ -38,11 +38,11 @@ Simply put that data you just got into the code's parameters strings.
 ## 📖 About the Blazor ChatBot
 The natural-sql-natural process methods works like this:
 
-This method maps the database structure into a JSON that Gemini analyzes to create an SQL query to fulfill the user's request, which is then run by the PostgreSQL Server, returning the requested data.
+This [method](https://gist.github.com/LuisMiSanVe/2da8e2d932a06ef408b3ee8468d0d820) maps the database structure into a JSON that Gemini analyzes to create an SQL query to fulfill the user's request, which is then run by the PostgreSQL Server, returning the requested data.
 
 Then, this data is processed by Gemini again to summary the results into natural language.
 
-Because the AI needs to process **two requests** (text to query and result table to text) the token usage is pretty high, thats why the **remembering capability** of the ChatBot is limited to the 5 prior messages, as is not meant to keep a single chat for too long.
+Because the AI needs to process **two requests** ([text to query and result table to text](https://gist.github.com/LuisMiSanVe/b189c8920d2dcedf5fd46485f3403d51)) the token usage is pretty high, thats why the **remembering capability** of the ChatBot is limited to the 5 prior messages, as is not meant to keep a single chat for too long.
 
 The chats are not stored so the ChatBot consists in a volatile single-session chat. Press `F5` to clear the current chat.
 
