@@ -17,6 +17,8 @@
         private readonly List<string> _conversationHistory = new();
         private const int MaxHistory = 5; // Keep only the last X messages
 
+        private string json = "";
+
         public ChatService(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -33,55 +35,58 @@
             {
                 connection.Open();
 
-                // OBTAIN DB
-                // Tables
-                var tablesDB = new NpgsqlCommand("SELECT CONCAT(table_schema, '.', table_name) AS full_table_name " +
-                                                 "FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name NOT LIKE 'pg_%' AND table_name NOT LIKE 'sql_%' " +
-                                                 "ORDER BY full_table_name;", connection).ExecuteReader();
-                // Table           Column(Type)
-                Dictionary<string, List<string>> tables = new Dictionary<string, List<string>>();
-
-                while (tablesDB.Read())
+                // // If the database is already mapped, it skips the process
+                if (json == "")
                 {
-                    if (!tables.ContainsKey(tablesDB.GetString(0)))
-                        //         Name                   Columns
-                        tables.Add(tablesDB.GetString(0), null);
-                }
-                tablesDB.Close();
-                // Columns
-                foreach (string tableName in tables.Keys)
-                {
-                    var columnsDB = new NpgsqlCommand("SELECT c.column_name, c.data_type, CASE WHEN tc.constraint_type = 'PRIMARY KEY' THEN 'PK' WHEN tc.constraint_type = 'FOREIGN KEY' THEN 'FK' ELSE '' END AS key_type " +
-                                                      "FROM information_schema.columns c " +
-                                                      "LEFT JOIN information_schema.key_column_usage kcu ON c.table_schema = kcu.table_schema AND c.table_name = kcu.table_name AND c.column_name = kcu.column_name " +
-                                                      "LEFT JOIN information_schema.table_constraints tc ON kcu.constraint_name = tc.constraint_name AND kcu.table_schema = tc.table_schema AND kcu.table_name = tc.table_name " +
-                                                      "WHERE c.table_schema = '" + tableName.Substring(0, tableName.IndexOf('.')) + "' AND c.table_name = '" + tableName.Remove(0, tableName.IndexOf('.') + 1) + "'" +
-                                                      "ORDER BY c.column_name;", connection).ExecuteReader();
+                    // OBTAIN DB
+                    // Tables
+                    var tablesDB = new NpgsqlCommand("SELECT CONCAT(table_schema, '.', table_name) AS full_table_name " +
+                                                    "FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name NOT LIKE 'pg_%' AND table_name NOT LIKE 'sql_%' " +
+                                                    "ORDER BY full_table_name;", connection).ExecuteReader();
+                    // Table           Column(Type)
+                    Dictionary<string, List<string>> tables = new Dictionary<string, List<string>>();
 
-                    List<string> columns = new List<string>();
-
-                    while (columnsDB.Read())
+                    while (tablesDB.Read())
                     {
-                        string columnInfo = columnsDB.GetString(0) + "(" + columnsDB.GetString(1) + ")";
-                        if (!columnsDB.GetString(2).Equals(""))
-                            columnInfo = columnsDB.GetString(0) + "(" + columnsDB.GetString(1) + ") (" + columnsDB.GetString(2) + ")";
-
-                        if (!columns.Contains(columnInfo))
-                        {   //      Name(Type)(Key)
-                            columns.Add(columnInfo);
-
-                            tables[tableName] = columns;
-                        }
+                        if (!tables.ContainsKey(tablesDB.GetString(0)))
+                            //         Name                   Columns
+                            tables.Add(tablesDB.GetString(0), null);
                     }
-                    columnsDB.Close();
+                    tablesDB.Close();
+                    // Columns
+                    foreach (string tableName in tables.Keys)
+                    {
+                        var columnsDB = new NpgsqlCommand("SELECT c.column_name, c.data_type, CASE WHEN tc.constraint_type = 'PRIMARY KEY' THEN 'PK' WHEN tc.constraint_type = 'FOREIGN KEY' THEN 'FK' ELSE '' END AS key_type " +
+                                                        "FROM information_schema.columns c " +
+                                                        "LEFT JOIN information_schema.key_column_usage kcu ON c.table_schema = kcu.table_schema AND c.table_name = kcu.table_name AND c.column_name = kcu.column_name " +
+                                                        "LEFT JOIN information_schema.table_constraints tc ON kcu.constraint_name = tc.constraint_name AND kcu.table_schema = tc.table_schema AND kcu.table_name = tc.table_name " +
+                                                        "WHERE c.table_schema = '" + tableName.Substring(0, tableName.IndexOf('.')) + "' AND c.table_name = '" + tableName.Remove(0, tableName.IndexOf('.') + 1) + "'" +
+                                                        "ORDER BY c.column_name;", connection).ExecuteReader();
+
+                        List<string> columns = new List<string>();
+
+                        while (columnsDB.Read())
+                        {
+                            string columnInfo = columnsDB.GetString(0) + "(" + columnsDB.GetString(1) + ")";
+                            if (!columnsDB.GetString(2).Equals(""))
+                                columnInfo = columnsDB.GetString(0) + "(" + columnsDB.GetString(1) + ") (" + columnsDB.GetString(2) + ")";
+
+                            if (!columns.Contains(columnInfo))
+                            {   //      Name(Type)(Key)
+                                columns.Add(columnInfo);
+
+                                tables[tableName] = columns;
+                            }
+                        }
+                        columnsDB.Close();
+                    }
+                    var opcions = new JsonSerializerOptions
+                    {
+                        WriteIndented = true // JSON format
+                    };
+
+                    json = System.Text.Json.JsonSerializer.Serialize(tables, opcions);
                 }
-                var opcions = new JsonSerializerOptions
-                {
-                    WriteIndented = true // JSON format
-                };
-
-                string json = System.Text.Json.JsonSerializer.Serialize(tables, opcions);
-
                 string history = "For contextualizing, this are the latest messages exchanged: (" + string.Join(", ", _conversationHistory);
 
                 // Creates context to modify AI's behavior
