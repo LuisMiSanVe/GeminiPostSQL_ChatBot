@@ -30,6 +30,10 @@
             var connection = new NpgsqlConnection(database);
 
             string result = "";
+            var opcions = new JsonSerializerOptions
+            {
+                WriteIndented = true // JSON format
+            };
 
             if (connection != null)
             {
@@ -80,11 +84,7 @@
                         }
                         columnsDB.Close();
                     }
-                    var opcions = new JsonSerializerOptions
-                    {
-                        WriteIndented = true // JSON format
-                    };
-
+                   
                     json = System.Text.Json.JsonSerializer.Serialize(tables, opcions);
                 }
                 string history = "For contextualizing, this are the latest messages exchanged: (" + string.Join(", ", _conversationHistory);
