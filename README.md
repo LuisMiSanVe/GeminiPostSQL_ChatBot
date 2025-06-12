@@ -12,7 +12,7 @@
 [![image](https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white)](https://visualstudio.microsoft.com/)
 
 >[!NOTE]
-> This is the Blazor ChatBot version meant for web client use. There is a [REST API](https://github.com/LuisMiSanVe/GeminiPostSQL_API/tree/main) version meant for servers with Swagger and a [WinForms](https://github.com/LuisMiSanVe/GeminiPostSQL/tree/main) version for Windows Desktop client use.
+> This is the Blazor ChatBot version meant for web client use. There is a [REST API](https://github.com/LuisMiSanVe/GeminiPostSQL_API/tree/main) version meant for servers with Swagger, a [WinForms](https://github.com/LuisMiSanVe/GeminiPostSQL/tree/main) version for Windows Desktop client use and a [NuGet](https://github.com/LuisMiSanVe/GeminiPostSQL_NuGet/tree/main) package for developers.
 
 This ChatBot program uses Google's AI 'Gemini 2.0 Flash' to make queries to PostgreSQL databases.  
 The AI interprets natural language into SQL queries, run them, and transform the results into natural language again.
